@@ -6,8 +6,8 @@ from prefect.blocks.system import Secret
 
 @task(name="dlt-full-load")
 def load_entire_database() -> str:
-    source_conn = Secret.load("erpnext-mysql-conn")
-    dest_conn = Secret.load("postgres-dwh-conn")
+    source_conn = Secret.load("erpnext-mysql-conn").get()
+    dest_conn = Secret.load("postgres-dwh-conn").get()
 
     """Use the sql_database source to completely load all tables in a database"""
     pipeline = dlt.pipeline(
