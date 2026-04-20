@@ -2,12 +2,12 @@ import humanize
 import dlt
 from dlt.sources.sql_database import sql_database
 from prefect import flow, task, get_run_logger
-from prefect_sqlalchemy import DatabaseCredentials
+from prefect_sqlalchemy import SqlAlchemyConnector
 
 @task(name="dlt-full-load")
 def load_entire_database() -> str:
-    source_conn = DatabaseCredentials.load("erpnext-mysql-conn")
-    dest_conn = DatabaseCredentials.load("postgres-dwh-conn")
+    source_conn = SqlAlchemyConnector.load("erpnext-mysql-conn")
+    dest_conn = SqlAlchemyConnector.load("postgres-dwh-conn")
 
     """Use the sql_database source to completely load all tables in a database"""
     pipeline = dlt.pipeline(
