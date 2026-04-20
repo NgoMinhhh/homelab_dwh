@@ -2,18 +2,22 @@ import humanize
 import dlt
 from dlt.sources.sql_database import sql_database
 from prefect import flow, task, get_run_logger
+from prefect_sqlalchemy import DatabaseCredentials
 
 @task(name="dlt-full-load")
 def load_entire_database() -> str:
+    source_conn = DatabaseCredentials.load("erpnext-mysql-conn")
+    dest_conn = DatabaseCredentials.load("postgres-dwh-conn")
+
     """Use the sql_database source to completely load all tables in a database"""
     pipeline = dlt.pipeline(
         pipeline_name="erpnext_raw_to_dwh", 
-        destination='postgres', 
+        destination=dlt.destinations.postgres(credentials=dest_conn), 
         dataset_name="erpnext_raw")
 
     # By default the sql_database source reflects all tables in the schema
     # The database credentials are sourced from the `.dlt/secrets.toml` configuration
-    source = sql_database(engine_kwargs={
+    source = sql_database(credentials=source_conn ,engine_kwargs={
         "connect_args":{
             "init_command": "SET GLOBAL max_connections = 100000"
         }   

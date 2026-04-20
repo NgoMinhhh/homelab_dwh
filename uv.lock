@@ -620,6 +620,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "dlt", extra = ["postgres"] },
     { name = "prefect" },
+    { name = "prefect-sqlalchemy" },
     { name = "pymysql" },
     { name = "sqlalchemy" },
 ]
@@ -628,6 +629,7 @@ dependencies = [
 requires-dist = [
     { name = "dlt", extras = ["postgres"], specifier = ">=1.25.0" },
     { name = "prefect", specifier = ">=3.6.27" },
+    { name = "prefect-sqlalchemy", specifier = ">=0.6.1" },
     { name = "pymysql", specifier = ">=1.1.2" },
     { name = "sqlalchemy", specifier = ">=2.0.49" },
 ]
@@ -1091,6 +1093,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/bb/eb/577e6f2a4a8b3707bfe64ea79bc91d45af2f883a5e5cf7073425e1842614/prefect-3.6.27.tar.gz", hash = "sha256:9959978eaa305eec49f7146eb3a5450cfff2a110033b27e5b6bed772139a6065", size = 11108814, upload-time = "2026-04-17T20:11:02.722Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/4e/25f9b1f0fcaafc60a60a03ae35d34ad1cfcb8e71e0c3e6fd4873ce2deacc/prefect-3.6.27-py3-none-any.whl", hash = "sha256:c2e87a174e423ca2becd02a9bd8363af16632e4511f99bce138a1c75723aab63", size = 12038508, upload-time = "2026-04-17T20:10:59.257Z" },
+]
+
+[[package]]
+name = "prefect-sqlalchemy"
+version = "0.6.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "prefect" },
+    { name = "sqlalchemy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ff/14/41a605724a067e2917c6e88bdc254ed8675d2031179e52d05c772733708a/prefect_sqlalchemy-0.6.1.tar.gz", hash = "sha256:7fb13101a568840a9fff1697d1cb1ac6931a340a52a3ec0a3b75929daebb5c77", size = 19185, upload-time = "2026-02-12T22:03:55.885Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/19/2eb0b80e92fb1597ce53f765548fa58a87949fceeb0bacb350388d2be00a/prefect_sqlalchemy-0.6.1-py3-none-any.whl", hash = "sha256:c7cf4dbaedf30b987cbdbb3cd645e55d6d59dbac6308f8385b808f936da267e3", size = 14827, upload-time = "2026-02-12T22:03:54.224Z" },
 ]
 
 [[package]]
