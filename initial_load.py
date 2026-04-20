@@ -1,10 +1,15 @@
 import humanize
 import dlt
 from dlt.sources.sql_database import sql_database
+from prefect import flow, task, get_run_logger
 
-def load_entire_database() -> None:
+@task(name="dlt-full-load")
+def load_entire_database() -> str:
     """Use the sql_database source to completely load all tables in a database"""
-    pipeline = dlt.pipeline(pipeline_name="rfam", destination='postgres', dataset_name="erpnext_raw")
+    pipeline = dlt.pipeline(
+        pipeline_name="erpnext_raw_to_dwh", 
+        destination='postgres', 
+        dataset_name="erpnext_raw")
 
     # By default the sql_database source reflects all tables in the schema
     # The database credentials are sourced from the `.dlt/secrets.toml` configuration
@@ -16,11 +21,19 @@ def load_entire_database() -> None:
 
     # Run the pipeline. For a large db this may take a while
     info = pipeline.run(source, write_disposition="replace")
-    print(humanize.precisedelta(pipeline.last_trace.finished_at - pipeline.last_trace.started_at))
-    print(info)
+    duration = humanize.precisedelta(
+        pipeline.last_trace.finished_at - pipeline.last_trace.started_at
+    )
+    return f"{duration}\n{info}"
 
+@flow(name="erpnext-initial-load",log_prints=True)
+def load_entire_database_flow() -> None:
+    logger = get_run_logger()
+    logger.info("Starting ERPNext initial full load into Postgres DWH")
+    result = load_entire_database()
+    logger.info(f"Load finished: {result} ")
 
 if __name__ == "__main__":
     # Load all tables from the database.
     # Warning: The sample database is very large
-    load_entire_database()
+    load_entire_database_flow()
