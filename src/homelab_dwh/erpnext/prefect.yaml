@@ -34,7 +34,7 @@ deployments:
   description: Initial full replace load of ERPNext MySQL into Postgres DWH
   schedule: {}
   flow_name: null
-  entrypoint: src/homelab_dwh/erpnext/initial_load.py:load_entire_database_flow
+  entrypoint: src/homelab_dwh/erpnext/load/initial_load.py:load_entire_database_flow
   parameters: {}
   work_pool:
     name: local-pool
@@ -49,7 +49,7 @@ deployments:
     cron: "0 2 * * *"
     timezone: "Australia/Adelaide"
   flow_name: null
-  entrypoint: src/homelab_dwh/erpnext/incremental_load.py:load_incremental_database_flow
+  entrypoint: src/homelab_dwh/erpnext/load/incremental_load.py:load_incremental_database_flow
   parameters: {}
   work_pool:
     name: local-pool
