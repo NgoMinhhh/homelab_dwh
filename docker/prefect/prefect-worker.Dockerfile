@@ -10,4 +10,6 @@ RUN pip install --no-cache-dir \
     "dlt[postgres]" \
     pymysql \
     humanize \
-    prefect-sqlalchemy
+    prefect-sqlalchemy \
+    dbt-core \
+    dbt-postgres \
