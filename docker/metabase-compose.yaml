@@ -1,43 +1,56 @@
 services:
   metabase:
-    image: metabase/metabase:latest
+    image: metabase/metabase:v0.60.x
     container_name: metabase
     hostname: metabase
+    restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:ro
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
       MB_DB_TYPE: postgres
-      MB_DB_DBNAME: ${MB_DB_DBNAME:-metabaseappdb}
-      MB_DB_PORT: 5432
+      MB_DB_DBNAME: ${MB_DB_DBNAME-metabaseappdb}
+      MB_DB_PORT: ${MB_DB_PORT:-5432}
       MB_DB_USER: ${MB_DB_USER:-metabase}
       MB_DB_PASS: ${MB_DB_PASS:-metabase}
-      MB_DB_HOST: ${MB_DB_HOST:-postgres}
+      MB_DB_HOST: ${MB_DB_HOST:-metabase-postgres}
     networks:
       - metabase_net
       - dwh_net
+    depends_on:
+      metabase-postgres:
+        condition: service_healthy
     healthcheck:
-      test: curl --fail -I http://localhost:3000/api/health || exit 1
+      test: ["CMD-SHELL", "curl --fail -I http://localhost:3000/api/health || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 5
-      
-  postgres:
-    image: postgres:16
-    container_name: postgres
-    hostname: postgres
+
+  metabase-postgres:
+    image: postgres:16-alpine
+    container_name: metabase-postgres
+    hostname: metabase-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${MB_DB_USER:-metabase}
-      POSTGRES_DB: ${MB_DB_DBNAME:-metabaseappdb}
       POSTGRES_PASSWORD: ${MB_DB_PASS:-metabase}
+      POSTGRES_DB: ${MB_DB_DBNAME:-metabaseappdb}
     volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - metabase_pg_data:/var/lib/postgresql
     networks:
       - metabase_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${MB_DB_USER} -d ${MB_DB_DBNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   dwh_net:
     external: true
   metabase_net:
     driver: bridge
+
+volumes:
+  metabase_pg_data:

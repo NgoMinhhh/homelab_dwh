@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: erpnext_raw
+    schema: ERPNEXT_RAW
+    tables:
+      - name: tab_journal_entry
+        identifier: TAB_JOURNAL_ENTRY
+
+      - name: tab_journal_entry_account
+        identifier: TAB_JOURNAL_ENTRY_ACCOUNT

@@ -10,6 +10,7 @@ dependencies = [
     "dlt[postgres]>=1.25.0",
     "prefect>=3.6.27",
     "prefect-sqlalchemy>=0.6.1",
+    "psycopg[binary]>=3.3.3",
     "pymysql>=1.1.2",
     "sqlalchemy>=2.0.49",
 ]
