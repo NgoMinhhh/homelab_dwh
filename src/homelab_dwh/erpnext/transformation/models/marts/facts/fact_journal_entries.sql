@@ -26,7 +26,7 @@ journal_entry_account as (
         account,
         cost_center,
         project as project_id,
-        "BUSINESS_UNIT" as business_unit,
+        business_unit,
         debit_in_account_currency,
         credit_in_account_currency
     from {{ source('erpnext_raw', 'tab_journal_entry_account') }}

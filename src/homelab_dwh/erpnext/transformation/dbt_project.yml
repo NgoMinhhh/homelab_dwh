@@ -36,9 +36,6 @@ models:
       +schema: erpnext_dbt_staging
       +materialized: view
 
-    intermediate:
-      +materialized: ephemeral
-
     marts:
       +schema: erpnext_dbt_marts
       dimensions:
