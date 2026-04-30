@@ -668,6 +668,15 @@ wheels = [
 ]
 
 [[package]]
+name = "graphql-core"
+version = "3.2.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/68/c5/36aa96205c3ecbb3d34c7c24189e4553c7ca2ebc7e1dd07432339b980272/graphql_core-3.2.8.tar.gz", hash = "sha256:015457da5d996c924ddf57a43f4e959b0b94fb695b85ed4c29446e508ed65cf3", size = 513181, upload-time = "2026-03-05T19:55:37.332Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/86/41/cb887d9afc5dabd78feefe6ccbaf83ff423c206a7a1b7aeeac05120b2125/graphql_core-3.2.8-py3-none-any.whl", hash = "sha256:cbee07bee1b3ed5e531723685369039f32ff815ef60166686e0162f540f1520c", size = 207349, upload-time = "2026-03-05T19:55:35.911Z" },
+]
+
+[[package]]
 name = "graphviz"
 version = "0.21"
 source = { registry = "https://pypi.org/simple" }
@@ -759,7 +768,7 @@ dependencies = [
     { name = "dbt-core" },
     { name = "dbt-postgres" },
     { name = "dlt", extra = ["postgres"] },
-    { name = "prefect" },
+    { name = "prefect", extra = ["dbt"] },
     { name = "prefect-sqlalchemy" },
     { name = "psycopg", extra = ["binary"] },
     { name = "pymysql" },
@@ -771,7 +780,7 @@ requires-dist = [
     { name = "dbt-core", specifier = ">=1.11.8" },
     { name = "dbt-postgres", specifier = ">=1.10.0" },
     { name = "dlt", extras = ["postgres"], specifier = ">=1.25.0" },
-    { name = "prefect", specifier = ">=3.6.27" },
+    { name = "prefect", extras = ["dbt"], specifier = ">=3.6.27" },
     { name = "prefect-sqlalchemy", specifier = ">=0.6.1" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.3.3" },
     { name = "pymysql", specifier = ">=1.1.2" },
@@ -1310,6 +1319,38 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/4e/25f9b1f0fcaafc60a60a03ae35d34ad1cfcb8e71e0c3e6fd4873ce2deacc/prefect-3.6.27-py3-none-any.whl", hash = "sha256:c2e87a174e423ca2becd02a9bd8363af16632e4511f99bce138a1c75723aab63", size = 12038508, upload-time = "2026-04-17T20:10:59.257Z" },
 ]
 
+[package.optional-dependencies]
+dbt = [
+    { name = "prefect-dbt" },
+]
+
+[[package]]
+name = "prefect-dbt"
+version = "0.7.23"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dbt-core" },
+    { name = "prefect" },
+    { name = "prefect-shell" },
+    { name = "sgqlc" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ee/68/971377a21c66d8d1a85b08c7340bea7d0795da0f8212988adf8911e25b96/prefect_dbt-0.7.23.tar.gz", hash = "sha256:f4aa3868dd224e8fd625f620a5d868c4e8fb1606da6fd47b446ccaa5712ac859", size = 220416, upload-time = "2026-04-22T03:59:19.673Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/27/1c/38215d0b0f5c13d4d235d45303224daf5359ad6756becf0bba0477ad824a/prefect_dbt-0.7.23-py3-none-any.whl", hash = "sha256:c47a7225b1ea1d238323e02251ddabb2b3d36b644845b57ba76946382a1f6e99", size = 113064, upload-time = "2026-04-22T03:59:18.19Z" },
+]
+
+[[package]]
+name = "prefect-shell"
+version = "0.3.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "prefect" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/81/5c/b9f3d71538df86317caaad6005e19df31846aac1a2aac83befe401aeb2a7/prefect_shell-0.3.5.tar.gz", hash = "sha256:4eaeba6d2845a3c2c6765f8d77ff5335f6032223bf210db419690ce8c0753324", size = 17915, upload-time = "2026-03-10T16:34:29.507Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/35/94/e6355d98d26d0a50760e28a5b76452fa525ee000e0decedf42a68a2df7ae/prefect_shell-0.3.5-py3-none-any.whl", hash = "sha256:04fd8b90970ec3820efa2aba9f65294e36c5966b440c171e03fc7680bfc2b8ac", size = 11973, upload-time = "2026-03-10T16:34:27.624Z" },
+]
+
 [[package]]
 name = "prefect-sqlalchemy"
 version = "0.6.1"
@@ -1846,6 +1887,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/4f/db/cfac1baf10650ab4d1c111714410d2fbb77ac5a616db26775db562c8fab2/setuptools-82.0.1.tar.gz", hash = "sha256:7d872682c5d01cfde07da7bccc7b65469d3dca203318515ada1de5eda35efbf9", size = 1152316, upload-time = "2026-03-09T12:47:17.221Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9d/76/f789f7a86709c6b087c5a2f52f911838cad707cc613162401badc665acfe/setuptools-82.0.1-py3-none-any.whl", hash = "sha256:a59e362652f08dcd477c78bb6e7bd9d80a7995bc73ce773050228a348ce2e5bb", size = 1006223, upload-time = "2026-03-09T12:47:15.026Z" },
+]
+
+[[package]]
+name = "sgqlc"
+version = "18"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "graphql-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/60/3b8c93b3d5df873bd13bc8fe0a4021d5f7442ca7ee6b98c5152dd55e18c7/sgqlc-18.tar.gz", hash = "sha256:a09f76fb69a2760523144f8d3acbf06a1b3710f63bf87fbac142d3538b1d639b", size = 245818, upload-time = "2026-02-06T19:56:23.957Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/da/96/8a5b972de8ede610aa088360927411b05c50ebcd669e52b0a3bfd1ed3ed9/sgqlc-18-py3-none-any.whl", hash = "sha256:7af53b5c1aab4602a98a36d6d32bd641e33f602b9b72468885f2505c59c536af", size = 86121, upload-time = "2026-02-06T19:56:22.07Z" },
 ]
 
 [[package]]
