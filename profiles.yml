@@ -1,0 +1,23 @@
+homelab_dwh_erpnext:
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
+
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | int }}"
+      dbname: "{{ env_var('DBT_DBNAME') }}"
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'dbt') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"
+
+    prod:
+      type: postgres
+      host: "{{ env_var('DBT_HOST') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | int }}"
+      dbname: "{{ env_var('DBT_DBNAME') }}"
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'dbt') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"
