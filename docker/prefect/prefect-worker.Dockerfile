@@ -17,7 +17,3 @@ RUN pip install --no-cache-dir uv \
     && uv pip install --system --no-cache -r pyproject.toml
 
 COPY . .
-
-ENV PYTHONPATH=/opt/prefect/app
-
-USER prefect
