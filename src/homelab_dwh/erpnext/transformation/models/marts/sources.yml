@@ -9,3 +9,15 @@ sources:
 
       - name: tab_journal_entry_account
         identifier: tab_journal_entry_account
+
+      - name: tab_purchase_invoice
+        identifier: tab_purchase_invoice
+
+      - name: tab_purchase_invoice_item
+        identifier: tab_purchase_invoice_item
+
+      - name: tab_sales_invoice
+        identifier: tab_sales_invoice
+
+      - name: tab_sales_invoice_item
+        identifier: tab_sales_invoice_item
