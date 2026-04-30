@@ -44,7 +44,7 @@ deployments:
 - name: nightly-incremental-load
   version: "1.0"
   tags: ["erpnext", "dlt", "incremental-load"]
-  description: Initial full replace load of ERPNext MySQL into Postgres DWH
+  description: Incremental load of ERPNext MySQL into Postgres DWH
   schedule: 
     cron: "0 2 * * *"
     timezone: "Australia/Adelaide"
@@ -55,3 +55,19 @@ deployments:
     name: local-pool
     work_queue_name: null
     job_variables: {}
+
+- name: dbt-transform
+  version: "1.0"
+  tags: ["erpnext", "dbt", "transform"]
+  description: Run dbt transformations on the DWH
+  schedule:
+    cron: "0 2 30 * *"
+    timezone: "Australia/Adelaide"
+  flow_name: null
+  entrypoint: src/homelab_dwh/erpnext/transformation/flow_transform.py:run_dbt
+  parameters: {}
+  work_pool:
+    name: local-pool
+    work_queue_name: null
+    job_variables: {}
+    
